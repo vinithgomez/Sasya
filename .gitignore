@@ -1,0 +1,25 @@
+# Python
+backend/venv/
+__pycache__/
+*.pyc
+backend/uvicorn.log
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# Data (too large for repo)
+data/raw/
+data/processed/
+
+# Model weights
+model/*.pt
+model/*.pth
+model/*.onnx
+model/*.tflite
+model/checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
