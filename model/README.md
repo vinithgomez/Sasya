@@ -26,8 +26,10 @@ python train.py                                     # full run, defaults
 
 `--limit-per-class` caps each class at N images before the train/val split — useful for quickly sanity-checking the pipeline without waiting on the full ~32.7k-image dataset.
 
-## Status
+## Status (paused 2026-07-19 — see CLAUDE.md > Where Things Stand)
 
-Smoke-tested 2026-07-18 (2 epochs, 150 images/class cap, ~4.3k images): stratified split correctly gave every one of the 30 classes non-zero train/val data, augmentation boost applied to the 5 classes with <400 training images (Sugarcane x3, Potato_Healthy, Tomato_Mosaic_Virus... at this capped size, most classes fell under the threshold since 120 < 400 — see script comments), weighted loss, training loop, and per-class F1 reporting all ran end-to-end without errors. Smoke-test weights were deleted after verification (not meaningful — trained on a tiny capped/subsampled slice for a couple epochs).
+Smoke-tested 2026-07-18 (2 epochs, 150 images/class cap, ~4.3k images): stratified split correctly gave every one of the 30 classes non-zero train/val data, augmentation boost applied to the classes with <400 training images at that capped size, weighted loss, training loop, and per-class F1 reporting all ran end-to-end without errors. Smoke-test weights were deleted after verification (not meaningful — trained on a tiny capped/subsampled slice for a couple epochs).
 
-Full training run not yet done — next step is running `python train.py` without `--limit-per-class` for a real training pass.
+Also ran one full epoch on the complete dataset (no `--limit-per-class`) purely to time it: ~29 min/epoch on CPU, 95.8% val accuracy already (Rice and Sugarcane classes underperforming — see CLAUDE.md for detail). That checkpoint (`model/epoch1_checkpoint.pt`) is still sitting locally, untracked/gitignored — it's a timing-test artifact, not a real trained model; don't load it expecting a usable classifier.
+
+Full training run (real epoch count, CPU or Colab GPU) not yet done — this is where the project was intentionally paused.

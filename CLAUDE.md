@@ -11,6 +11,28 @@ Final-year software project: an AI-powered plant disease/pest detection system f
 **Differentiator (locked)**:
 - [x] Regional Indian crop focus (tomato, chili, potato, corn, rice, sugarcane, cotton — confirmed) — fine-tuned/curated over generic US datasets
 
+## Where Things Stand / How to Resume
+
+_(Project paused 2026-07-19 — a deliberate time/priorities break, not a stall on a problem. Nothing below needs to be reconsidered on return; the approach and every decision so far are still considered correct.)_
+
+**Done and verified:**
+- Scaffolding complete and working end-to-end: FastAPI backend (placeholder `/predict`) and React + Vite + Tailwind frontend (upload/preview/analyze flow), verified working together in-browser.
+- Dataset fully sourced and merged: 3 sources (PlantVillage, Five Crop Diseases Dataset, Cotton Leaf Disease Dataset) mapped into 30 unified classes and copied into `data/processed/` — confirmed as of this update: 30 class folders, 32,726 images total. See `data/README.md` for the full class mapping and `data/prepare_dataset.py` for the merge script (dry-run mode included).
+- Model architecture decided and documented: EfficientNet-B0 transfer learning, image classification (not object detection) — see Model Architecture Decision below.
+- `model/train.py` written and smoke-tested: stratified train/val split (verified no class ends up with zero validation images), heavier augmentation for underrepresented classes, class-weighted loss, per-class precision/recall/F1 logging. Smoke test (2 epochs, capped data) ran end-to-end with no errors.
+
+**Not done — training has not been completed:**
+- Only a 1-epoch timing run on the full dataset (CPU) has been done, purely to estimate duration: ~29 min/epoch, so a real 12–25 epoch run would take roughly 7–12 hours unattended on CPU. That single epoch already reached 95.8% validation accuracy, but with Rice and Sugarcane classes visibly underperforming (Rice_Leaf_Blast, Rice_Brown_Spot, Sugarcane_Red_Rot notably weaker than the rest) — worth specific attention once real training runs.
+- No trained model checkpoint is committed to the project (correct — weights are gitignored regardless). A local, untracked artifact from that timing test (`model/epoch1_checkpoint.pt`) is sitting on disk for reference only — it is not a real trained model, don't load it expecting a usable classifier.
+- Colab/GPU exploration (a notebook porting `train.py` for GPU training with Drive persistence) was set aside and removed from the repo — full training hasn't been run on either CPU or GPU yet.
+
+**Immediate next step on resume:**
+1. Decide CPU (slow, ~7–12 hrs unattended, no iteration room) vs. Colab GPU (fast, ~15–30 min, room to iterate) for the real training run, then actually run it.
+2. Evaluate real per-class results once trained — Rice and Sugarcane are the classes to watch closely.
+3. Replace the backend's dummy `/predict` response with real model inference.
+4. Build the treatment-recommendation lookup table covering all 30 classes.
+5. Frontend polish, real-world (non-lab-condition) photo testing, then deployment (see Tech Stack below for target platforms).
+
 ## Model Architecture Decision
 
 **Locked: EfficientNet-B0, fine-tuned via transfer learning, image classification (not object detection).**
@@ -62,6 +84,7 @@ _(Append dated entries here as real decisions get made — dataset choices, mode
 - 2026-07-18 — Crop list confirmed: tomato, chili (bell pepper proxy), potato, corn, rice, sugarcane, cotton. Dataset sourcing finalized as a three-way merge — PlantVillage (tomato/chili/potato/corn), Five Crop Diseases Dataset (rice/sugarcane), Cotton Leaf Disease Dataset (cotton) — with a unified class naming scheme documented in `data/README.md`. Exact cotton-dataset folder names still need verification after download.
 - 2026-07-18 — Cotton class list upgraded from 2 generic placeholder classes (`Cotton_Diseased_Leaf`, `Cotton_Healthy_Leaf`) to 4 specific classes (`Cotton_Bacterial_Blight`, `Cotton_Curl_Virus`, `Cotton_Fusarium_Wilt`, `Cotton_Healthy`) after confirming the actual downloaded dataset's folder names. `data/prepare_dataset.py` and `data/README.md` updated accordingly; dry run confirms all 30 unified classes now resolve correctly against `data/raw/` (~32.7k images total). Sugarcane classes remain the notable underrepresented group (100 images each). Correction: earlier entries in this log miscounted this as 28 classes — the correct total is 30 (Tomato 10, Chili 2, Potato 3, Corn 4, Rice 4, Sugarcane 3, Cotton 4).
 - 2026-07-18 — Model architecture locked: EfficientNet-B0 transfer learning, image classification (not object detection). YOLOv8 object detection deferred to a future v2 stretch goal (requires re-annotated bounding-box data, out of scope for the final-year submission).
+- 2026-07-19 — Project paused (time/priorities, not a technical blocker). A 1-epoch CPU timing run confirmed the training pipeline works and gave a duration estimate (~29 min/epoch); the Colab/GPU exploration notebook was removed from the repo since it wasn't going to be used before the pause. See "Where Things Stand / How to Resume" above for full detail.
 
 ## Open Questions / Not Yet Decided
 
