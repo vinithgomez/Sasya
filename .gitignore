@@ -1,8 +1,10 @@
 # Python
 backend/venv/
+model/venv/
 __pycache__/
 *.pyc
 backend/uvicorn.log
+model/_epoch1_run.log
 
 # Node
 frontend/node_modules/
