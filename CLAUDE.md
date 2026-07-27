@@ -13,25 +13,25 @@ Final-year software project: an AI-powered plant disease/pest detection system f
 
 ## Where Things Stand / How to Resume
 
-_(Project paused 2026-07-19 — a deliberate time/priorities break, not a stall on a problem. Nothing below needs to be reconsidered on return; the approach and every decision so far are still considered correct.)_
+_(Project resumed 2026-07-27. Training is now complete — see Final Training Results below. Nothing here needs to be reconsidered; the approach and every decision so far are still considered correct.)_
 
 **Done and verified:**
 - Scaffolding complete and working end-to-end: FastAPI backend (placeholder `/predict`) and React + Vite + Tailwind frontend (upload/preview/analyze flow), verified working together in-browser.
 - Dataset fully sourced and merged: 3 sources (PlantVillage, Five Crop Diseases Dataset, Cotton Leaf Disease Dataset) mapped into 30 unified classes and copied into `data/processed/` — confirmed as of this update: 30 class folders, 32,726 images total. See `data/README.md` for the full class mapping and `data/prepare_dataset.py` for the merge script (dry-run mode included).
 - Model architecture decided and documented: EfficientNet-B0 transfer learning, image classification (not object detection) — see Model Architecture Decision below.
-- `model/train.py` written and smoke-tested: stratified train/val split (verified no class ends up with zero validation images), heavier augmentation for underrepresented classes, class-weighted loss, per-class precision/recall/F1 logging. Smoke test (2 epochs, capped data) ran end-to-end with no errors.
+- `model/train.py` written and smoke-tested: stratified train/val split (verified no class ends up with zero validation images), heavier augmentation for underrepresented classes, class-weighted loss, per-class precision/recall/F1 logging.
+- **Model training complete** (2026-07-27): full 15-epoch run on GPU (Colab), all 30 classes, full ~32.7k dataset. Overall accuracy 0.985, macro F1 0.982. Trained weights (`krishivision_model.pt`) are on disk at `model/` (gitignored, not committed). Known limitation: Rice classes — see Final Training Results below for the full table and the confusion-matrix analysis of the Rice weak spot.
 
-**Not done — training has not been completed:**
-- Only a 1-epoch timing run on the full dataset (CPU) has been done, purely to estimate duration: ~29 min/epoch, so a real 12–25 epoch run would take roughly 7–12 hours unattended on CPU. That single epoch already reached 95.8% validation accuracy, but with Rice and Sugarcane classes visibly underperforming (Rice_Leaf_Blast, Rice_Brown_Spot, Sugarcane_Red_Rot notably weaker than the rest) — worth specific attention once real training runs.
-- No trained model checkpoint is committed to the project (correct — weights are gitignored regardless). A local, untracked artifact from that timing test (`model/epoch1_checkpoint.pt`) is sitting on disk for reference only — it is not a real trained model, don't load it expecting a usable classifier.
-- Colab/GPU exploration (a notebook porting `train.py` for GPU training with Drive persistence) was set aside and removed from the repo — full training hasn't been run on either CPU or GPU yet.
+**Not done — next up:**
+- Backend `/predict` still needs to be wired to real inference (currently in progress).
+- Treatment-recommendation lookup table covering all 30 classes not yet built.
+- Frontend polish and real-world (non-lab-condition) photo testing not yet done.
+- Deployment not yet done (see Tech Stack below for target platforms).
 
-**Immediate next step on resume:**
-1. Decide CPU (slow, ~7–12 hrs unattended, no iteration room) vs. Colab GPU (fast, ~15–30 min, room to iterate) for the real training run, then actually run it.
-2. Evaluate real per-class results once trained — Rice and Sugarcane are the classes to watch closely.
-3. Replace the backend's dummy `/predict` response with real model inference.
-4. Build the treatment-recommendation lookup table covering all 30 classes.
-5. Frontend polish, real-world (non-lab-condition) photo testing, then deployment (see Tech Stack below for target platforms).
+**Immediate next step:**
+1. Replace the backend's dummy `/predict` response with real model inference (load `krishivision_model.pt` once at startup, apply the same preprocessing as validation, return predicted class + confidence).
+2. Build the treatment-recommendation lookup table for all 30 classes.
+3. Frontend polish, real-world photo testing, then deployment.
 
 ## Model Architecture Decision
 
@@ -46,6 +46,62 @@ If the project continues past graduation/submission, YOLOv8 would enable real ob
 - Multi-instance detection (e.g. several different pests/diseases visible in one frame)
 
 This would require a new annotated dataset (bounding boxes, not folder labels) — the current PlantVillage/Five-Crop/Cotton data is not directly usable for YOLO training without re-annotation. Treat this as a distinct v2 initiative, not an incremental add-on to the current classifier.
+
+## Final Training Results (2026-07-27)
+
+Full training run: 15 epochs, GPU (Colab), EfficientNet-B0 transfer learning, all 30 classes, full ~32.7k-image dataset (stratified 80/20 split, class-weighted loss, heavier augmentation for underrepresented classes — see `model/train.py`).
+
+**Overall accuracy: 0.985 — Macro F1: 0.982 — Weighted F1: 0.985**
+
+| Class | Precision | Recall | F1 | Support |
+|---|---|---|---|---|
+| Chili_Bacterial_Spot | 1.000 | 1.000 | 1.000 | 199 |
+| Chili_Healthy | 0.997 | 1.000 | 0.998 | 296 |
+| Corn_Common_Rust | 1.000 | 1.000 | 1.000 | 238 |
+| Corn_Gray_Leaf_Spot | 0.960 | 0.932 | 0.946 | 103 |
+| Corn_Healthy | 1.000 | 1.000 | 1.000 | 232 |
+| Corn_Northern_Leaf_Blight | 0.965 | 0.980 | 0.972 | 197 |
+| Cotton_Bacterial_Blight | 1.000 | 1.000 | 1.000 | 90 |
+| Cotton_Curl_Virus | 1.000 | 1.000 | 1.000 | 83 |
+| Cotton_Fusarium_Wilt | 1.000 | 1.000 | 1.000 | 84 |
+| Cotton_Healthy | 1.000 | 1.000 | 1.000 | 85 |
+| Potato_Early_Blight | 1.000 | 1.000 | 1.000 | 200 |
+| Potato_Healthy | 1.000 | 0.967 | 0.983 | 30 |
+| Potato_Late_Blight | 1.000 | 0.995 | 0.997 | 200 |
+| Rice_Brown_Spot | 0.818 | 0.805 | 0.811 | 123 |
+| Rice_Healthy | 0.890 | 0.980 | 0.933 | 298 |
+| Rice_Leaf_Blast | 0.928 | 0.795 | 0.856 | 195 |
+| Rice_Neck_Blast | 1.000 | 1.000 | 1.000 | 200 |
+| Sugarcane_Bacterial_Blight | 1.000 | 1.000 | 1.000 | 20 |
+| Sugarcane_Healthy | 1.000 | 1.000 | 1.000 | 20 |
+| Sugarcane_Red_Rot | 1.000 | 1.000 | 1.000 | 20 |
+| Tomato_Bacterial_Spot | 0.988 | 1.000 | 0.994 | 426 |
+| Tomato_Early_Blight | 0.990 | 0.985 | 0.987 | 200 |
+| Tomato_Healthy | 1.000 | 1.000 | 1.000 | 318 |
+| Tomato_Late_Blight | 0.992 | 0.997 | 0.995 | 382 |
+| Tomato_Leaf_Mold | 0.990 | 1.000 | 0.995 | 190 |
+| Tomato_Mosaic_Virus | 0.987 | 1.000 | 0.993 | 75 |
+| Tomato_Septoria_Leaf_Spot | 1.000 | 1.000 | 1.000 | 354 |
+| Tomato_Spider_Mites | 0.997 | 1.000 | 0.999 | 335 |
+| Tomato_Target_Spot | 0.996 | 0.989 | 0.993 | 281 |
+| Tomato_Yellow_Leaf_Curl_Virus | 1.000 | 0.993 | 0.997 | 1072 |
+
+### Known limitation: Rice classes (not silently fixed — documented honestly)
+
+Every class hits F1 ≥ 0.93 except three Rice classes: **Rice_Brown_Spot (F1 0.811)** and **Rice_Leaf_Blast (F1 0.856, recall 0.795 — missing ~20% of true blast cases)**, with Rice_Healthy also mildly affected (F1 0.933, pulled down by precision 0.890 despite recall 0.980). This is not a data volume issue — these classes have 613–1488 training images, comfortably sized. Rice_Neck_Blast, by contrast, is perfect (F1 1.000), so this isn't "Rice is hard" generically.
+
+**Confusion matrix evidence** (reproduced locally against `krishivision_model.pt` on the same stratified val split, 98.69% overall accuracy — close enough to the reported 98.5% to trust as the same split):
+
+| True \ Predicted | Brown_Spot | Healthy | Leaf_Blast | Neck_Blast |
+|---|---|---|---|---|
+| Rice_Brown_Spot (n=123) | 110 | 8 | 5 | 0 |
+| Rice_Healthy (n=298) | 3 | 292 | 3 | 0 |
+| Rice_Leaf_Blast (n=195) | 19 | 21 | 155 | 0 |
+| Rice_Neck_Blast (n=200) | 0 | 0 | 0 | 200 |
+
+This is **not a clean two-way Brown_Spot↔Leaf_Blast confusion** as initially hypothesized — it's a three-way cluster also involving Rice_Healthy. Rice_Leaf_Blast is confused with Rice_Healthy (21 cases, 10.8%) slightly *more* than with Rice_Brown_Spot (19 cases, 9.7%); Rice_Brown_Spot is likewise confused with Healthy (8, 6.5%) more than with Leaf_Blast (5, 4.1%). Rice_Neck_Blast has zero confusion with any other Rice class — cleanly separated.
+
+**Working theory**: this looks more like under-detection of subtle/early-stage lesions (misread as Healthy) than pure disease-vs-disease visual similarity, though genuine Brown_Spot/Leaf_Blast lesion similarity is also a real, separate contributor (19+5=24 cases confused directly between the two). Both mechanisms are plausible and not mutually exclusive. Flagging as an open limitation rather than a fixed problem — if revisited, worth investigating with a Rice-specific augmentation boost, more Rice training data, or a review of mislabeled/ambiguous source images, rather than assuming the fix is obvious.
 
 ## Tech Stack
 
@@ -85,6 +141,7 @@ _(Append dated entries here as real decisions get made — dataset choices, mode
 - 2026-07-18 — Cotton class list upgraded from 2 generic placeholder classes (`Cotton_Diseased_Leaf`, `Cotton_Healthy_Leaf`) to 4 specific classes (`Cotton_Bacterial_Blight`, `Cotton_Curl_Virus`, `Cotton_Fusarium_Wilt`, `Cotton_Healthy`) after confirming the actual downloaded dataset's folder names. `data/prepare_dataset.py` and `data/README.md` updated accordingly; dry run confirms all 30 unified classes now resolve correctly against `data/raw/` (~32.7k images total). Sugarcane classes remain the notable underrepresented group (100 images each). Correction: earlier entries in this log miscounted this as 28 classes — the correct total is 30 (Tomato 10, Chili 2, Potato 3, Corn 4, Rice 4, Sugarcane 3, Cotton 4).
 - 2026-07-18 — Model architecture locked: EfficientNet-B0 transfer learning, image classification (not object detection). YOLOv8 object detection deferred to a future v2 stretch goal (requires re-annotated bounding-box data, out of scope for the final-year submission).
 - 2026-07-19 — Project paused (time/priorities, not a technical blocker). A 1-epoch CPU timing run confirmed the training pipeline works and gave a duration estimate (~29 min/epoch); the Colab/GPU exploration notebook was removed from the repo since it wasn't going to be used before the pause. See "Where Things Stand / How to Resume" above for full detail.
+- 2026-07-27 — Model training complete: 15 epochs, GPU (Colab), full 30-class/~32.7k-image dataset. Overall accuracy 0.985, macro F1 0.982, weighted F1 0.985 — see Final Training Results above for the full per-class table. Known limitation documented (not silently fixed): Rice_Brown_Spot (F1 0.811) and Rice_Leaf_Blast (F1 0.856) are the weak spots, confirmed via confusion matrix to be a three-way confusion cluster with Rice_Healthy (not a clean two-way Brown_Spot/Leaf_Blast confusion as initially hypothesized) — Rice_Neck_Blast is unaffected (F1 1.000). Trained weights (`krishivision_model.pt`) placed at `model/` locally, gitignored.
 
 ## Open Questions / Not Yet Decided
 

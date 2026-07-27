@@ -29,7 +29,16 @@ function App() {
         method: 'POST',
         body: formData,
       })
-      if (!res.ok) throw new Error(`Request failed (${res.status})`)
+      if (!res.ok) {
+        let message = `Request failed (${res.status})`
+        try {
+          const errorData = await res.json()
+          if (errorData?.detail) message = errorData.detail
+        } catch {
+          // response body wasn't JSON -- keep the generic message
+        }
+        throw new Error(message)
+      }
       const data = await res.json()
       setResult(data)
     } catch (err) {
@@ -75,7 +84,14 @@ function App() {
           disabled={!file || loading}
           className="mt-4 w-full rounded-md bg-green-600 px-4 py-2 text-white font-medium hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
         >
-          {loading ? 'Analyzing...' : 'Analyze'}
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <span className="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
+              Analyzing...
+            </span>
+          ) : (
+            'Analyze'
+          )}
         </button>
 
         {error && (
