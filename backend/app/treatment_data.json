@@ -1,0 +1,339 @@
+{
+  "Tomato_Bacterial_Spot": {
+    "causal_organism": "Xanthomonas axonopodis pv. vesicatoria",
+    "symptoms": "Small, brown, water-soaked, circular leaf spots with yellow halo; defoliation of older leaves; small water-soaked spots on green fruit that become irregular, light brown, sunken and scabby.",
+    "management": [
+      "Use disease-free seed",
+      "Spray Streptocycline 40-100 ppm (20 g/acre)"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/tomato_diseases_11.html",
+    "is_healthy": false
+  },
+  "Tomato_Early_Blight": {
+    "causal_organism": "Alternaria solani",
+    "symptoms": "Brown spots with concentric rings in a bullseye pattern, yellow margin; fruit infected through calyx/stem attachment with brown concentric rings.",
+    "management": [
+      "Remove and destroy crop debris; crop rotation",
+      "Seed treatment: Trichoderma asperellum @ 4g/kg seed",
+      "Spray one of: Iprodione 50% WP @ 600 g/ac, Azoxystrobin 23% SC @ 200 ml/ac, Mancozeb 35% SC @ 1 kg/ac, or several other listed fungicide options (see source for full list)"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/tomato_diseases_2.html",
+    "is_healthy": false
+  },
+  "Tomato_Late_Blight": {
+    "causal_organism": "Phytophthora infestans",
+    "symptoms": "Water-soaked black lesions on leaves/stems, rapidly expanding to necrosis; white sporulation on leaves; dark brown lesions and soft rot on fruit.",
+    "management": [
+      "Ensure proper drainage; crop rotation",
+      "Soil application of Trichoderma asperellum (viride) @ 1.0 kg/acre",
+      "Spray one of: Cyazofamid 34.5% SC @ 80 ml/ac, Azoxystrobin 23% SC @ 200 ml/ac, Mancozeb 35% SC @ 1000 g/ac (see source for full list)"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/tomato_diseases_8.html",
+    "is_healthy": false
+  },
+  "Tomato_Septoria_Leaf_Spot": {
+    "causal_organism": "Septoria lycopersici",
+    "symptoms": "Small round-to-irregular spots with grey centre and dark margin; spots coalesce causing blight and complete defoliation; stems and flowers also affected.",
+    "management": [
+      "Remove and destroy affected plant parts",
+      "Seed treatment: Trichoderma asperellum @ 4g/kg seed",
+      "Spray Fluxapyroxad 250 g/l + Pyraclostrobin 250 g/l SC @ 200-250 ml/ha"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/tomato_diseases_4.html",
+    "is_healthy": false
+  },
+  "Tomato_Yellow_Leaf_Curl_Virus": {
+    "causal_organism": "Tomato Leaf Curl Virus (TLCV), vectored by whiteflies (Bemisia tabaci)",
+    "symptoms": "Severe stunting; downward rolling/crinkling of leaves; older leaves leathery and brittle; shortened internodes; bushy appearance from excess lateral branching.",
+    "management": [
+      "Raise nursery under protected conditions",
+      "Grow sorghum, maize, or bajra as a barrier crop",
+      "Use disease-free seedlings",
+      "Yellow sticky traps @ 5/acre",
+      "Remove alternate weed host (Abutilon indicum)",
+      "Spray one of: Dimethoate 30 EC @ 200 ml/ac, Thiamethoxam 25 WG @ 200 g/ac, Imidacloprid 17.8 SL @ 200 ml/ac (targets the whitefly vector, not the virus itself — there is no direct antiviral treatment)",
+      "Note: this treatment targets the whitefly vector — the virus itself is not curable once a plant is infected; there is no direct antiviral treatment."
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/tomato_diseases_6.html",
+    "is_healthy": false
+  },
+  "Tomato_Mosaic_Virus": {
+    "causal_organism": "Cucumber Mosaic Virus (labeled by TNAU as \"Tomato Mosaic Virus\" causal organism; some naming overlap in literature between ToMV and CMV, not fully disambiguated here)",
+    "symptoms": "Light/dark green mottling on leaves; wilting of young leaves; leaflet distortion and puckering; \"fern leaf\" and \"shoestring\" symptoms; stunted growth.",
+    "management": [
+      "Use disease-free seeds",
+      "Remove infected plants",
+      "Crop rotation"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/tomato_diseases_12.html",
+    "is_healthy": false
+  },
+  "Tomato_Spider_Mites": {
+    "causal_organism": "Red spider mite, Tetranychus spp. (a mite pest, not a fungal/bacterial disease)",
+    "symptoms": "Affected leaves turn reddish-brown and bronzy; severe infestation produces silken webbing on leaves, which wither and dry; flower and fruit formation affected.",
+    "management": [
+      "Spray wettable sulphur 50 WP @ 2 g/litre, or dicofol 18.5 EC @ 2.5 ml/litre"
+    ],
+    "source": "TNAU Agritech Portal (Insect Pest section) — https://agritech.tnau.ac.in/crop_protection/tomato/tomato_7.html",
+    "is_healthy": false
+  },
+  "Tomato_Leaf_Mold": {
+    "causal_organism": "Passalora fulva (formerly Fulvia fulva / Cladosporium fulvum)",
+    "symptoms": "Pale green/yellow spots without well-defined margins on upper leaf surface, turning distinctly yellow; olive-green velvety mold visible on the lower leaf surface; lesions coalesce in severe cases, foliage dies; primarily a disease of high-humidity greenhouse-grown tomatoes, less common in open field.",
+    "management": [
+      "Improve ventilation/air circulation — stake and prune plants, space them further apart",
+      "Avoid wetting leaves when watering",
+      "Remove crop residue/debris from the field; rotate with non-tomato vegetables",
+      "Preventative fungicide program: chlorothalonil, mancozeb, or copper-based fungicide",
+      "Grow resistant cultivars where available"
+    ],
+    "source": "Not TNAU-sourced (no dedicated Indian-source coverage found) — consensus across Clemson HGIC (https://hgic.clemson.edu/factsheet/tomato-diseases-disorders/), UMass Amherst CAFE (https://ag.umass.edu/vegetable/fact-sheets/tomato-leaf-mold), University of Kentucky (https://veggiescout.mgcafe.uky.edu/node/154).",
+    "is_healthy": false
+  },
+  "Tomato_Target_Spot": {
+    "causal_organism": "Corynespora cassiicola",
+    "symptoms": "Starts on older leaves, spreading upward; small necrotic lesions with light-brown centers and dark margins on leaves, sometimes with a ring/target pattern; on fruit, brown slightly sunken flecks that develop into larger pitted areas; spreads rapidly in wet weather and can defoliate/destroy the whole plant. Important disease in tropical/subtropical regions, relevant to Indian growing conditions.",
+    "management": [
+      "Cultural: check seedlings in nursery before transplanting; avoid planting new crops next to old infected ones; remove lower leaves after fruit trusses are picked; weed control",
+      "Chemical: fungicides proven effective include chlorothalonil, azoxystrobin, pyraclostrobin, boscalid, and a famoxadone+mancozeb combination product",
+      "Resistance management: rotate fungicide classes — strobilurin-resistant strains of C. cassiicola have been documented, so repeated use of the same fungicide class risks resistance development"
+    ],
+    "source": "Not TNAU-sourced — University of Florida IFAS Extension (https://ipm.ifas.ufl.edu/pdfs/Target_Spot.pdf, https://edis.ifas.ufl.edu/publication/PP351).",
+    "is_healthy": false
+  },
+  "Tomato_Healthy": {
+    "causal_organism": null,
+    "symptoms": null,
+    "management": [
+      "No disease detected — this plant appears healthy. No treatment needed."
+    ],
+    "source": null,
+    "is_healthy": true
+  },
+  "Chili_Bacterial_Spot": {
+    "causal_organism": "Xanthomonas campestris pv. vesicatoria",
+    "symptoms": "Small circular/irregular, dark brown to black greasy spots on leaves; spots enlarge with a lighter center surrounded by a dark band; spots coalesce into irregular lesions; severely affected leaves turn chlorotic and fall off; petioles and stems affected, stem infection causes cankerous growth and branch wilting; on fruit — round, raised, water-soaked spots with a pale yellow border that turn brown with a depressed center, sometimes showing bacterial ooze droplets.",
+    "management": [
+      "Spray mancozeb @ 2 g/litre or copper oxychloride @ 2.5 g/litre",
+      "Seed treatment with 0.1% mercuric chloride solution for 2-5 minutes",
+      "Seedlings may be sprayed with 1% Bordeaux mixture or 0.25% copper oxychloride",
+      "Do not spray streptomycin after fruit formation begins",
+      "Field sanitation important; obtain seeds only from disease-free plants"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/chilli_diseases_4.html",
+    "is_healthy": false
+  },
+  "Chili_Healthy": {
+    "causal_organism": null,
+    "symptoms": null,
+    "management": [
+      "No disease detected — this plant appears healthy. No treatment needed."
+    ],
+    "source": null,
+    "is_healthy": true
+  },
+  "Potato_Early_Blight": {
+    "causal_organism": "Alternaria solani",
+    "symptoms": "Oval-to-angular dark brown/black \"target\" spots on leaflets with concentric rings of dead tissue, narrow chlorotic (yellowing) halo around each spot; lowest/oldest leaves infected first; can cause leaf droop and yield loss if severe; tuber lesions are less common than leaf infection but appear as sunken, dark, circular spots.",
+    "management": [
+      "Cultural: crop rotation, remove and destroy infected debris, avoid overhead irrigation, keep plants adequately fertilized (stressed plants are more susceptible)",
+      "Chemical: Mancozeb applied as foliar spray @ 0.25% (with 1% urea) at 40-45 days crop age, repeated at 8-10 day intervals; for higher disease pressure, alternating with a systemic fungicide like hexaconazole 5 EC @ 0.05% between mancozeb sprays improved control further",
+      "Use resistant/late-maturing varieties where available"
+    ],
+    "source": "Field trial conducted at Potato Research Station, S.D. Agricultural University, Deesa, India (2015-16 and 2016-17) — https://www.academia.edu/129963294 and https://www.academia.edu/116758209. (TNAU's own page exists but blocked automated fetching; this Indian field-study source was used as a substitute.)",
+    "is_healthy": false
+  },
+  "Potato_Late_Blight": {
+    "causal_organism": "Phytophthora infestans",
+    "symptoms": "Affects leaves, stems, and tubers. Water-soaked spots on leaves that enlarge, turning purple-brown then black; white fungal growth on the underside of leaves; spreads to petioles and stems, frequently developing at nodes, causing the stem to break and the plant to topple; tubers show purplish-brown spots that on cutting reveal rusty-brown necrosis spreading from the surface toward the center.",
+    "management": [
+      "Protective spraying with mancozeb or zineb @ 0.2% to prevent tuber infection",
+      "Minimize tuber contamination by avoiding injury at harvest and not storing visibly infected tubers",
+      "Recommended resistant varieties (India-specific): Kufri Naveen, Kufri Jeevan, Kufri Alenkar, Kufri Khasi Garo, Kufri Moti",
+      "Destroy foliage a few days before harvest (via suitable herbicide) to reduce tuber contamination risk",
+      "Favourable conditions to watch for: relative humidity >90%, temperature 10-25°C, night temperature ~10°C, cloudiness before rainfall"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/crop_prot_crop%20diseases_veg_potato_1.html",
+    "is_healthy": false
+  },
+  "Potato_Healthy": {
+    "causal_organism": null,
+    "symptoms": null,
+    "management": [
+      "No disease detected — this plant appears healthy. No treatment needed."
+    ],
+    "source": null,
+    "is_healthy": true
+  },
+  "Corn_Common_Rust": {
+    "causal_organism": "Puccinia sorghi",
+    "symptoms": "Minute flecks appear on both leaf surfaces; circular-to-elongate cinnamon-brown, powdery, erumpent (bursting-through) pustules on both surfaces; pustules turn brownish-black as the crop matures; in severe cases, infection spreads to the leaf sheath and other plant parts. Alternate hosts: Oxalis europea, O. corniculata, O. stricta (common wood-sorrel weeds) — the pathogen needs these to complete its life cycle before infecting maize. Favourable conditions: cool, warm, moist weather (15-25°C).",
+    "management": [
+      "Remove alternate host weeds (Oxalis species) near the field",
+      "Collect and destroy (burn or bury) crop remains after harvest",
+      "Foliar spray: kresoxim-methyl 44.3% SC @ 1 ml/litre, OR tebuconazole @ 1 ml/litre, OR chlorothalonil/mancozeb @ 2 ml/litre — applied at 35 and 50 days after sowing (DAS)"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/maize_disease_new/maize_4.html",
+    "is_healthy": false
+  },
+  "Corn_Northern_Leaf_Blight": {
+    "causal_organism": "Exserohilum turcicum (and Helminthosporium maydis, per TNAU's listing)",
+    "symptoms": "(TNAU catalogs this as \"Leaf Blight\" — matches Northern Leaf Blight / Turcicum Leaf Blight, same disease.) Long, cigar-shaped, grey-green to tan lesions on lower leaves first; lesions are slender/oblong, tapering at the ends, 1-6 inches long; run parallel to leaf margins and coalesce to cover the entire leaf; spores produced on the underside of the leaf, giving a dusty black/green fuzz appearance below the lesions; affected leaves become greyish-green and brittle, resembling frost damage. Favourable conditions: wet, humid, cool weather, typically later in the growing season.",
+    "management": [
+      "Burn or bury infected maize stubble after harvest",
+      "Foliar spray: mancozeb or zineb @ 2-4 g/litre, OR propiconazole 25% EC @ 1 ml/litre — applied at 35 and 50 days after sowing (DAS)"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/maize_disease_new/maize_2.html",
+    "is_healthy": false
+  },
+  "Corn_Gray_Leaf_Spot": {
+    "causal_organism": "Cercospora zeae-maydis",
+    "symptoms": "Rectangular, narrow lesions bound by leaf veins, tan-to-gray in color, running parallel to the leaf veins; lesions can coalesce and cause significant blighting under heavy pressure; particularly damaging in warm (~27°C/80°F), high-humidity conditions (RH ≥90% for 12+ hours).",
+    "management": [
+      "Cultural: crop rotation and residue/stubble management (the pathogen survives in maize residue between seasons, so reduced-till/no-till/continuous maize cropping increases risk); use genetically resistant hybrids where available — considered the most economical long-term control",
+      "Chemical: foliar fungicide applications with propiconazole or mancozeb have been shown to significantly reduce disease severity and improve yield in field trials — most effective when applied early, as disease severity reaches 2-3% of leaf area affected, and while lesions are still confined to the lowest 5 leaves"
+    ],
+    "source": "Not TNAU-sourced (not among TNAU's 5 listed maize diseases) — PubMed/Plant Disease journal (https://pubmed.ncbi.nlm.nih.gov/30870945/, https://pubmed.ncbi.nlm.nih.gov/18943592/), Pioneer Seeds agronomy guide (https://www.pioneer.com/us/agronomy/gray_leaf_spot_cropfocus.html).",
+    "is_healthy": false
+  },
+  "Corn_Healthy": {
+    "causal_organism": null,
+    "symptoms": null,
+    "management": [
+      "No disease detected — this plant appears healthy. No treatment needed."
+    ],
+    "source": null,
+    "is_healthy": true
+  },
+  "Rice_Brown_Spot": {
+    "causal_organism": "Helminthosporium oryzae (syn. Drechslera oryzae; sexual stage: Cochliobolus miyabeanus) — also called sesame leaf spot / Helminthosporiose / fungal blight",
+    "symptoms": "Starts as minute brown dots, becoming cylindrical-to-oval-to-circular, resembling sesame seeds (0.5-2.0mm), coalescing into large patches that dry up the leaf; also infects panicle/neck (brown coloration) and seeds (black/brown spots on glumes, covered by an olive velvety growth); infected seed causes germination failure, seedling mortality, and reduced grain quality/weight; up to 50% yield loss in severe cases. Attacks from seedling (nursery) stage through to milk stage in the main field. Favourable conditions: 25-30°C, relative humidity above 80%, leaves wet 8-24 hours for infection; excess nitrogen aggravates it; notably common in nutrient-deficient or unflooded soils, rare in fertile, well-irrigated soils.",
+    "management": [
+      "Cultural: use disease-free seed (disease is seed-borne); remove alternate/collateral weed hosts; grow resistant varieties — ADT 44, PY 4, CORH 1, CO 44, Cauvery, Bhavani, TPS 4, Dhanu; ensure proper nutrition and avoid water stress (most important preventive factor); amend silicon-deficient soils with calcium silicate slag and irrigate well",
+      "Seed treatment: Pseudomonas fluorescens @ 10g/kg seed + seedling dip @ 2.5kg/ha in 100L water for 30 min; OR Captan/Thiram @ 2.0g/kg seed; OR hot water seed treatment (53-54°C for 10-12 min, after pre-soaking in cold water 8 hours)",
+      "Chemical: spray Mancozeb @ 2.0g/litre OR Edifenphos @ 1ml/litre, 2-3 times at 10-15 day intervals, preferably early morning or afternoon during flowering and post-flowering; tricyclazole seed treatment followed by mancozeb+tricyclazole spray at tillering and late booting stages also gives good control"
+    ],
+    "source": "TNAU Agritech Portal (expert system) — http://www.agritech.tnau.ac.in/expert_system/paddy/cpdisbrownspot.html",
+    "is_healthy": false
+  },
+  "Rice_Leaf_Blast": {
+    "causal_organism": "Magnaporthe oryzae (syn: Pyricularia grisea, Magnaporthe grisea)",
+    "symptoms": "(TNAU treats Leaf Blast and Neck Blast as manifestations of one disease — \"Blast\" — at different plant sites; both classes share the same causal organism/source.) Attacks the crop from seedling to late tillering and ear-heading stages; appears on leaves, nodes, rachis, and glumes. Leaf blast: small bluish-green flecks that enlarge under moist conditions into spindle-shaped spots with a grey center and dark brown margin; spots coalesce, large leaf areas dry and wither; severely infected fields appear \"burnt\" from a distance. Nodal blast: black lesions girdle the nodes; affected nodes may break, killing all plant parts above the infected node. Neck blast: grayish-brown lesions on the neck, girdling it and causing the panicle to fall over; if infection occurs before the milky stage, no grain forms at all; later infection produces poor-quality grain. Favourable conditions: intermittent drizzles, cloudy weather, high relative humidity (93-99%), low night temperature (15-20°C, or below 26°C), presence of collateral/alternate host weeds, excess nitrogen application. Collateral (alternate) hosts: Panicum repens, Digitaria magrginata, Brachiaria mutica, Leersia hexandra, Echinochloa crusgalli.",
+    "management": [
+      "Grow resistant/moderately resistant varieties: CO 47, CO 51, CO 52, CO 53, CO 55, CO 56, ASD 18, IR64",
+      "Remove and destroy weed hosts on field bunds and channels",
+      "Seed treatment: Captan, Thiram, Carbendazim, or Tricyclazole @ 2g/kg seed, OR Bacillus subtilis @ 10g/kg seed",
+      "Nursery spray: Carbendazim 50 WP @ 25g, or Edifenphos 50 EC @ 25ml, per 20-cent nursery",
+      "Main field foliar spray (at first symptoms): Edifenphos @ 200ml/acre, OR Carbendazim @ 100g/acre, OR Tricyclazole 75 WP @ 200g/acre, OR Iprobenphos (IBP) @ 200ml/acre, OR azoxystrobin + difenoconazole @ 100ml/acre"
+    ],
+    "source": "TNAU Agritech Portal, in partnership with AICRIP (All India Coordinated Rice Improvement Project) and IRRI (International Rice Research Institute, Philippines) — https://agritech.tnau.ac.in/crop_protection/rice_diseases/rice_1.html and https://agritech.tnau.ac.in/crop_protection/rice_diseases/another%20methods_rice_1.html",
+    "is_healthy": false
+  },
+  "Rice_Neck_Blast": {
+    "causal_organism": "Magnaporthe oryzae (syn: Pyricularia grisea, Magnaporthe grisea)",
+    "symptoms": "(TNAU treats Leaf Blast and Neck Blast as manifestations of one disease — \"Blast\" — at different plant sites; both classes share the same causal organism/source.) Attacks the crop from seedling to late tillering and ear-heading stages; appears on leaves, nodes, rachis, and glumes. Leaf blast: small bluish-green flecks that enlarge under moist conditions into spindle-shaped spots with a grey center and dark brown margin; spots coalesce, large leaf areas dry and wither; severely infected fields appear \"burnt\" from a distance. Nodal blast: black lesions girdle the nodes; affected nodes may break, killing all plant parts above the infected node. Neck blast: grayish-brown lesions on the neck, girdling it and causing the panicle to fall over; if infection occurs before the milky stage, no grain forms at all; later infection produces poor-quality grain. Favourable conditions: intermittent drizzles, cloudy weather, high relative humidity (93-99%), low night temperature (15-20°C, or below 26°C), presence of collateral/alternate host weeds, excess nitrogen application. Collateral (alternate) hosts: Panicum repens, Digitaria magrginata, Brachiaria mutica, Leersia hexandra, Echinochloa crusgalli.",
+    "management": [
+      "Grow resistant/moderately resistant varieties: CO 47, CO 51, CO 52, CO 53, CO 55, CO 56, ASD 18, IR64",
+      "Remove and destroy weed hosts on field bunds and channels",
+      "Seed treatment: Captan, Thiram, Carbendazim, or Tricyclazole @ 2g/kg seed, OR Bacillus subtilis @ 10g/kg seed",
+      "Nursery spray: Carbendazim 50 WP @ 25g, or Edifenphos 50 EC @ 25ml, per 20-cent nursery",
+      "Main field foliar spray (at first symptoms): Edifenphos @ 200ml/acre, OR Carbendazim @ 100g/acre, OR Tricyclazole 75 WP @ 200g/acre, OR Iprobenphos (IBP) @ 200ml/acre, OR azoxystrobin + difenoconazole @ 100ml/acre"
+    ],
+    "source": "TNAU Agritech Portal, in partnership with AICRIP (All India Coordinated Rice Improvement Project) and IRRI (International Rice Research Institute, Philippines) — https://agritech.tnau.ac.in/crop_protection/rice_diseases/rice_1.html and https://agritech.tnau.ac.in/crop_protection/rice_diseases/another%20methods_rice_1.html",
+    "is_healthy": false
+  },
+  "Rice_Healthy": {
+    "causal_organism": null,
+    "symptoms": null,
+    "management": [
+      "No disease detected — this plant appears healthy. No treatment needed."
+    ],
+    "source": null,
+    "is_healthy": true
+  },
+  "Sugarcane_Red_Rot": {
+    "causal_organism": "Colletotrichum falcatum (teleomorph/sexual stage: Glomerella tucumanensis)",
+    "symptoms": "Reddening of the internal pith/stalk tissue (visible when the cane is split open), often with white patches interspersed in the red discoloration and a sour smell; on leaves — tiny reddish lesions on the upper leaf surface (2-3mm long, ~0.5mm wide), a minute red dot on the midrib that later becomes straw-colored in the center with darker fungal fruiting bodies (acervuli) developing; considered one of the most economically damaging sugarcane diseases in India (\"the cancer of sugarcane\"), causing severe losses in cane yield and sugar recovery in susceptible varieties; spreads rapidly in the rainy season, sometimes killing the entire crop.",
+    "management": [
+      "Cultural: use disease-free planting material (setts); hot water treatment of setts before planting; crop rotation; field sanitation — remove and destroy infected plant debris; grow resistant/moderately-resistant varieties (variety resistance is not permanent, so periodic variety rotation is advised)",
+      "Biological: Trichoderma harzianum and Trichoderma viride strains (isolated from sugarcane rhizosphere soil) have shown strong biocontrol effect in Indian field trials — in one study, a T. harzianum strain fully controlled red rot in ~47-48% of treated canes and reduced severity substantially in the remainder, versus 97-100% infection in untreated canes; applied as a sett/soil treatment"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/sugarcane_diseases/sugarcane_d4.html (page blocked automated fetching, content confirmed via indexed search snippets and secondary citations); supplemented with Indian Phytopathology / ICAR ePubs (https://epubs.icar.org.in/index.php/IPPJ/article/view/12862) and Sugar Tech journal (https://link.springer.com/article/10.1007/s12355-008-0028-7).",
+    "is_healthy": false
+  },
+  "Sugarcane_Bacterial_Blight": {
+    "causal_organism": "Xanthomonas albilineans",
+    "symptoms": "(Your dataset's \"Bacterial Blight\" class most likely corresponds to what is universally documented as Leaf Scald, the standard bacterial disease of sugarcane.) Hallmark symptom is a thin white \"pencil line\" (1-2mm wide) running from the midrib to the leaf margin, parallel to the veins, sometimes with a diffuse yellow border and reddish discoloration along part of its length; as the disease progresses, brown necrotic (dead) tissue develops from the leaf tip or margin, eventually covering the whole leaf, giving a scalded/burned appearance (hence the name); infection can be latent for years with no visible symptoms before suddenly causing wilting and death of mature stalks; spreads via infected cuttings/setts and contaminated cutting tools.",
+    "management": [
+      "Important honest note: there is currently no effective chemical or biological treatment for leaf scald — multiple sources confirm control relies entirely on prevention.",
+      "Use resistant varieties (best available strategy)",
+      "Hot water treatment of seed cane before planting",
+      "Sterilize/disinfect cutting tools and implements between plants (prevents mechanical spread)",
+      "Avoid planting seedcane from any field with visible disease symptoms",
+      "Quarantine measures during germplasm/variety exchange between regions"
+    ],
+    "source": "TNAU Agritech Portal (paddy expert system — despite the URL path, this page covers sugarcane leaf scald) — http://www.agritech.tnau.ac.in/expert_system/paddy/cpdisleafscald.html; cross-confirmed by Texas A&M Plant Disease Handbook, USDA APHIS (https://www.aphis.usda.gov/plant-pests-diseases/sugarcane-disease), and a 2025 peer-reviewed review (https://www.mdpi.com/2223-7747/14/4/508).",
+    "is_healthy": false
+  },
+  "Sugarcane_Healthy": {
+    "causal_organism": null,
+    "symptoms": null,
+    "management": [
+      "No disease detected — this plant appears healthy. No treatment needed."
+    ],
+    "source": null,
+    "is_healthy": true
+  },
+  "Cotton_Bacterial_Blight": {
+    "causal_organism": "Xanthomonas axonopodis pv. malvacearum (also cited as X. campestris pv. malvacearum)",
+    "symptoms": "Attacks the plant at every stage from seed to harvest, with five recognized phases: (1) Seedling blight — small, water-soaked, circular/irregular lesions on cotyledons, spreading to the stem via the petiole, causing seedling withering and death; (2) Angular leaf spot — small dark-green water-soaked spots on the leaf underside, becoming angular (restricted by leaf veins) as they enlarge, turning reddish-brown with age, visible on both leaf surfaces; (3) Vein blight/vein necrosis (black vein) — veins and veinlets blacken, bacterial ooze forms as crusts on the leaf underside, affected leaves crinkle, twist inward, and wither, spreads to the petiole causing defoliation; (4) Black arm — dark brown-to-black lesions on stems/fruiting branches that can girdle them, causing premature leaf drop, stem cracking, gumming, and stems breaking to hang as dry black twigs; (5) Square rot/boll rot — water-soaked lesions on bolls turning dark/sunken, spreading through the whole boll, causing premature bursting, lint gets stained yellow by bacterial ooze and loses market value, seeds are also infected. Favourable conditions: soil temp ~28°C, air temp 30-40°C, relative humidity 85%, early sowing, delayed thinning, poor tillage, late irrigation, potassium-deficient soil; rain followed by bright sunshine in October-November is especially favorable.",
+    "management": [
+      "Delint cotton seeds with concentrated sulphuric acid @ 100ml/kg seed",
+      "Treat delinted seeds with carboxin or oxycarboxin @ 2g/kg, OR soak seeds in 1000 ppm Streptomycin sulphate overnight",
+      "Remove and destroy infected plant debris; rogue out volunteer cotton plants and weed hosts",
+      "Crop rotation with non-host crops",
+      "Early thinning, early earthing-up with potash",
+      "Grow resistant varieties: Sujatha, 1412, CRH 71",
+      "Spray Streptomycin sulphate + Tetracycline mixture @ 100g, combined with Copper oxychloride @ 1.25 kg/ha"
+    ],
+    "source": "eAGRI (Indian agricultural university e-course repository, Plant Pathology course PATH272) — http://eagri.org/eagri50/PATH272/lecture13/008.html",
+    "is_healthy": false
+  },
+  "Cotton_Curl_Virus": {
+    "causal_organism": "Cotton Leaf Curl Virus (CLCuV) — a begomovirus (family Geminiviridae), single-stranded circular DNA, bipartite genome",
+    "symptoms": "Downward and upward curling of leaves, thickening of veins, enations (small outgrowths) on the underside of leaves; in severe infection, all leaves curl and plant growth is retarded; boll-bearing capacity is reduced. One of the most economically damaging cotton diseases in India and Pakistan, with documented outbreaks causing 37-64% incidence in parts of northwest India (Haryana, Punjab, Rajasthan) in some years. Vector/spread: transmitted by the whitefly Bemisia tabaci (viruliferous, i.e. virus-carrying whiteflies); alternate/cultivated host plants serve as year-round virus reservoirs; not transmitted by seed or contact — control must target the insect vector, not the plant directly.",
+    "management": [
+      "Time planting dates to avoid peak whitefly vector population",
+      "Eliminate volunteer perennial cotton and alternate malvaceous hosts (e.g. wild okra)",
+      "Biological vector control: the fungus Paecilomyces farinosus parasitizes whitefly and reduces vector population",
+      "Foliar application of neem leaf extract + 1% neem oil — shown to reduce virus transmission by up to 80% in field studies",
+      "Granular systemic insecticides for direct vector management"
+    ],
+    "source": "eAGRI Plant Pathology course — http://eagri.org/eagri50/PATH272/lecture13/009.html, cross-confirmed for Indian-context severity by peer-reviewed research (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7176085/, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7004920/)",
+    "is_healthy": false
+  },
+  "Cotton_Fusarium_Wilt": {
+    "causal_organism": "Fusarium oxysporum f.sp. vasinfectum",
+    "symptoms": "Yellowing and browning of cotyledons, followed by browning of the petiole; loss of leaf turgidity, yellowing, drooping, and wilting; browning/blackening of internal vascular tissue (visible as streaks when the stem is cut); infected plants are stunted with fewer bolls. Favourable conditions: soil temperature 20-30°C; hot, dry periods followed by rain; heavy black (alkaline) soils; excess nitrogen/phosphatic fertilizer; wounds from root-knot nematode (Meloidogyne incognita) or Ash weevil grubs (Myllocerus pustulatus) increase susceptibility by creating entry points.",
+    "management": [
+      "Remove and burn infected plant debris after deep summer ploughing",
+      "Apply farmyard manure or other organic manure @ 4 tonnes/acre",
+      "Mixed cropping with non-host plants to reduce soil temperature via shading",
+      "Treat acid-delinted seeds with Chlorothalonil @ 4g/kg seed",
+      "Seed treatment with Bacillus subtilis @ 10g/kg, OR Trichoderma asperellum @ 4g/kg",
+      "Soil application of Trichoderma asperellum @ 1kg/acre, twice — at sowing and again at 90 days after sowing (multiply 1kg of T. asperellum in 100kg farmyard manure for 15 days before application)",
+      "Spot drenching with Carbendazim 50% WP @ 1g/litre water"
+    ],
+    "source": "TNAU Agritech Portal — https://agritech.tnau.ac.in/crop_protection/cotton_diseases/cotton_d1.html",
+    "is_healthy": false
+  },
+  "Cotton_Healthy": {
+    "causal_organism": null,
+    "symptoms": null,
+    "management": [
+      "No disease detected — this plant appears healthy. No treatment needed."
+    ],
+    "source": null,
+    "is_healthy": true
+  }
+}

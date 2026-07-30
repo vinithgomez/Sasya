@@ -104,9 +104,50 @@ function App() {
             <p className="text-lg font-semibold text-gray-900">
               {result.class}
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 mb-3">
               Confidence: {(result.confidence * 100).toFixed(1)}%
             </p>
+
+            {result.is_healthy ? (
+              <p className="text-sm text-green-700 bg-green-50 rounded-md p-3">
+                {result.treatment?.management?.[0]}
+              </p>
+            ) : (
+              result.treatment && (
+                <div className="border-t border-gray-100 pt-3 space-y-3">
+                  {result.treatment.causal_organism && (
+                    <p className="text-sm text-gray-700">
+                      <span className="font-medium text-gray-900">Causal organism: </span>
+                      {result.treatment.causal_organism}
+                    </p>
+                  )}
+
+                  {result.treatment.symptoms && (
+                    <p className="text-sm text-gray-700">
+                      <span className="font-medium text-gray-900">Symptoms: </span>
+                      {result.treatment.symptoms}
+                    </p>
+                  )}
+
+                  {result.treatment.management?.length > 0 && (
+                    <div className="text-sm text-gray-700">
+                      <span className="font-medium text-gray-900">Management:</span>
+                      <ul className="list-disc list-inside mt-1 space-y-1">
+                        {result.treatment.management.map((step, i) => (
+                          <li key={i}>{step}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {result.treatment.source && (
+                    <p className="text-xs text-gray-400 pt-1">
+                      Source: {result.treatment.source}
+                    </p>
+                  )}
+                </div>
+              )
+            )}
           </div>
         )}
       </div>

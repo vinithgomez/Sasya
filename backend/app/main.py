@@ -1,4 +1,5 @@
 import io
+import json
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -11,6 +12,7 @@ from torchvision import transforms
 from torchvision.models import efficientnet_b0
 
 MODEL_PATH = Path(__file__).resolve().parent.parent.parent / "model" / "krishivision_model.pt"
+TREATMENT_DATA_PATH = Path(__file__).resolve().parent / "treatment_data.json"
 
 IMAGE_SIZE = 224
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
@@ -40,9 +42,15 @@ def load_model():
     model_state["class_names"] = class_names
 
 
+def load_treatment_data():
+    with open(TREATMENT_DATA_PATH, encoding="utf-8") as f:
+        model_state["treatment_data"] = json.load(f)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     load_model()
+    load_treatment_data()
     yield
 
 
@@ -69,17 +77,26 @@ async def predict(file: UploadFile = File(...)):
     image_bytes = await file.read()
     try:
         image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-    except UnidentifiedImageError:
+    except (UnidentifiedImageError, OSError):
         raise HTTPException(status_code=400, detail="Could not read image file")
 
     input_tensor = inference_transform(image).unsqueeze(0)
 
     model = model_state["model"]
     class_names = model_state["class_names"]
+    treatment_data = model_state["treatment_data"]
 
     with torch.no_grad():
         logits = model(input_tensor)
         probabilities = F.softmax(logits, dim=1)[0]
         confidence, predicted_idx = torch.max(probabilities, dim=0)
 
-    return {"class": class_names[predicted_idx.item()], "confidence": float(confidence.item())}
+    predicted_class = class_names[predicted_idx.item()]
+    treatment = treatment_data.get(predicted_class)
+
+    return {
+        "class": predicted_class,
+        "confidence": float(confidence.item()),
+        "is_healthy": treatment["is_healthy"] if treatment else None,
+        "treatment": treatment,
+    }
