@@ -47,6 +47,41 @@ If the project continues past graduation/submission, YOLOv8 would enable real ob
 
 This would require a new annotated dataset (bounding boxes, not folder labels) — the current PlantVillage/Five-Crop/Cotton data is not directly usable for YOLO training without re-annotation. Treat this as a distinct v2 initiative, not an incremental add-on to the current classifier.
 
+## Future Enhancements
+
+**True plant-vs-not-plant detection (beyond the current confidence/entropy proxy).** `/predict` now rejects low-confidence/high-entropy predictions as "uncertain" (see Out-of-Distribution Safeguard below), which catches most non-plant images the closed-set classifier would otherwise confidently misclassify. But this is a proxy based on how *unsure* the model's softmax output is, not genuine content-based detection — a flat/low-entropy input (e.g. a solid-color image) can still slip through with artificially high confidence, since the network was never trained to recognize "not a plant" as a category at all. A real fix would need a separate detector, either:
+- Gating through a general-purpose pretrained classifier (e.g. an ImageNet-based model) to check for plant/vegetation-related categories before running the specialized 30-class model, or
+- Training a dedicated binary "plant leaf vs not" classifier on a newly-sourced negative dataset (non-leaf photos, screenshots, random objects, etc.)
+
+Explicitly out of scope for the current version — treat as a distinct future initiative alongside the YOLOv8 stretch goal above, not an incremental fix to the current threshold logic.
+
+## Known Limitation: Out-of-Scope Crop Species
+
+Manual testing revealed a distinct failure mode from the plant/not-plant OOD case: when given a real leaf photo from a crop species NOT in the 7 supported crops (tomato, chili, potato, corn, rice, sugarcane, cotton) — e.g. a pear or apple leaf — the model does not reject it or express uncertainty. Instead it confidently (99.5%+ in one observed case) misclassifies it as one of its known 30 classes, because the model has genuinely learned visual features that happen to resemble a trained class, so confidence/entropy is low and the existing OOD safeguard does not catch this.
+
+This is fundamentally different from the plant/not-plant problem: the model isn't uncertain here, it's confidently wrong, because it has no concept of "species outside my training set" — it can only ever choose among its 30 trained classes.
+
+No confidence-threshold adjustment can fix this, since the issue isn't miscalibration — it's that the model was never trained to recognize this input as out-of-scope at all.
+
+**Supporting evidence:** a follow-up test showed the model can also falsely trigger on non-plant images that happen to contain plant-like visual elements in the background/scenery (e.g. a tree in a stylized image), while genuinely plant-free images (tested with a dark, textureless image) are correctly rejected by the OOD safeguard. This confirms the model pattern-matches on any plant-like visual features present in the image, rather than on whether a leaf is the actual photographed subject.
+
+**Real fix (out of scope for current version):** a dedicated species-identification gate — a separate classifier trained to first verify the input belongs to one of the 7 supported crop species before running disease classification. This is distinct from and additional to the plant-vs-not-plant detector already noted above.
+
+**Current mitigation:** implemented 2026-07-31 — the frontend upload page now states the 7 supported crops directly ("Supports: Tomato, Chili, Potato, Corn, Rice, Sugarcane, Cotton"), so users have some warning before uploading an unsupported species. This is a UI-copy mitigation only; nothing changed at the model level, and results for unsupported crop species should still not be trusted.
+
+## Out-of-Distribution Safeguard
+
+Added 2026-07-31: `/predict` computes the full softmax distribution (not just top-1) and rejects the prediction as `{"status": "uncertain", ...}` if either:
+- top-1 confidence is below `CONFIDENCE_THRESHOLD` (0.80, raised from an initial 0.60 — see below), or
+- normalized entropy (entropy ÷ log(30), so it's on a 0–1 scale regardless of class count) is above `NORMALIZED_ENTROPY_THRESHOLD` (0.5)
+
+Calibration test (2026-07-31) against 6 non-plant images (solid color, random noise, a text screenshot, and three synthetic stand-ins for "object photo" / "person photo" / "anime-style image" — real stock photos weren't available, so these were procedurally generated and are an imperfect proxy) and 5 real plant images (Chili_Bacterial_Spot, Rice_Brown_Spot, Rice_Leaf_Blast, Tomato_Healthy, Cotton_Curl_Virus):
+
+- **5 of 6 non-plant images correctly rejected at the original 0.60 threshold.** The miss: a flat solid-color image was accepted at 75% confidence, 0.30 normalized entropy — predicted `Corn_Healthy`. This is the known failure mode described in Future Enhancements above (low-entropy false confidence on content-free input), not a bug in the threshold logic itself.
+- **5 of 5 real plant images correctly accepted**, confidence 0.90–1.00, entropy 0.00–0.15 — comfortably clear of both thresholds, no false rejections observed.
+
+`CONFIDENCE_THRESHOLD` raised from 0.60 to **0.80** (2026-07-31) based on this data — all 5 real plant confidences were ≥0.90, so this catches the solid-color miss (0.75 < 0.80) at zero observed cost to real results. Still pending: manual verification with real (non-synthetic) non-plant photos, including the original anime image that motivated this feature, plus the user's own real leaf photos — the synthetic test set above is an imperfect proxy and this threshold isn't considered final until that manual check passes.
+
 ## Final Training Results (2026-07-27)
 
 Full training run: 15 epochs, GPU (Colab), EfficientNet-B0 transfer learning, all 30 classes, full ~32.7k-image dataset (stratified 80/20 split, class-weighted loss, heavier augmentation for underrepresented classes — see `model/train.py`).

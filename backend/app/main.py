@@ -1,5 +1,6 @@
 import io
 import json
+import math
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -17,6 +18,14 @@ TREATMENT_DATA_PATH = Path(__file__).resolve().parent / "treatment_data.json"
 IMAGE_SIZE = 224
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]
+
+# Out-of-distribution / low-confidence rejection. The model always picks one
+# of its 30 trained classes, even for images that aren't a crop leaf at all --
+# these thresholds are a proxy to catch obviously-bad inputs by looking at how
+# "sure" the softmax distribution is, not true plant-vs-not-plant detection.
+# See CLAUDE.md > Future Enhancements for why a real detector would differ.
+CONFIDENCE_THRESHOLD = 0.80
+NORMALIZED_ENTROPY_THRESHOLD = 0.5
 
 # Same preprocessing as train.py's val_transform -- resize + normalize, no augmentation.
 inference_transform = transforms.Compose([
@@ -91,12 +100,26 @@ async def predict(file: UploadFile = File(...)):
         probabilities = F.softmax(logits, dim=1)[0]
         confidence, predicted_idx = torch.max(probabilities, dim=0)
 
+    confidence = float(confidence.item())
+    entropy = -sum(p.item() * math.log(p.item()) for p in probabilities if p.item() > 0)
+    normalized_entropy = entropy / math.log(len(class_names))
+
+    if confidence < CONFIDENCE_THRESHOLD or normalized_entropy > NORMALIZED_ENTROPY_THRESHOLD:
+        return {
+            "status": "uncertain",
+            "message": "Unable to confidently identify this as a known crop or disease. Please upload a clear photo of a single crop leaf.",
+            "confidence": confidence,
+            "entropy": normalized_entropy,
+        }
+
     predicted_class = class_names[predicted_idx.item()]
     treatment = treatment_data.get(predicted_class)
 
     return {
+        "status": "ok",
         "class": predicted_class,
-        "confidence": float(confidence.item()),
+        "confidence": confidence,
+        "entropy": normalized_entropy,
         "is_healthy": treatment["is_healthy"] if treatment else None,
         "treatment": treatment,
     }
