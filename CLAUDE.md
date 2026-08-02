@@ -13,25 +13,24 @@ Final-year software project: an AI-powered plant disease/pest detection system f
 
 ## Where Things Stand / How to Resume
 
-_(Project resumed 2026-07-27. Training is now complete — see Final Training Results below. Nothing here needs to be reconsidered; the approach and every decision so far are still considered correct.)_
+_(Last updated 2026-08-01. Nothing here needs to be reconsidered; the approach and every decision so far are still considered correct.)_
 
 **Done and verified:**
-- Scaffolding complete and working end-to-end: FastAPI backend (placeholder `/predict`) and React + Vite + Tailwind frontend (upload/preview/analyze flow), verified working together in-browser.
-- Dataset fully sourced and merged: 3 sources (PlantVillage, Five Crop Diseases Dataset, Cotton Leaf Disease Dataset) mapped into 30 unified classes and copied into `data/processed/` — confirmed as of this update: 30 class folders, 32,726 images total. See `data/README.md` for the full class mapping and `data/prepare_dataset.py` for the merge script (dry-run mode included).
+- Scaffolding complete and working end-to-end: FastAPI backend and React + Vite + Tailwind frontend, upload/preview/analyze flow verified in-browser.
+- Dataset fully sourced and merged: 3 sources mapped into 30 unified classes in `data/processed/` (32,726 images) — see `data/README.md` and `data/prepare_dataset.py`.
 - Model architecture decided and documented: EfficientNet-B0 transfer learning, image classification (not object detection) — see Model Architecture Decision below.
-- `model/train.py` written and smoke-tested: stratified train/val split (verified no class ends up with zero validation images), heavier augmentation for underrepresented classes, class-weighted loss, per-class precision/recall/F1 logging.
-- **Model training complete** (2026-07-27): full 15-epoch run on GPU (Colab), all 30 classes, full ~32.7k dataset. Overall accuracy 0.985, macro F1 0.982. Trained weights (`krishivision_model.pt`) are on disk at `model/` (gitignored, not committed). Known limitation: Rice classes — see Final Training Results below for the full table and the confusion-matrix analysis of the Rice weak spot.
+- Model training complete: full 15-epoch run on GPU (Colab), all 30 classes. Overall accuracy 0.985, macro F1 0.982. Trained weights (`krishivision_model.pt`) on disk at `model/` (gitignored, not committed). Known limitation documented, not silently fixed: Rice classes — see Final Training Results below.
+- Backend `/predict` wired to real inference: loads `krishivision_model.pt` once at startup, real preprocessing and prediction — no longer a placeholder response.
+- **Treatment recommendations: done.** All 30 classes, sourced primarily from TNAU with non-Indian-source gaps explicitly flagged (see `data/treatment_recommendations/`), wired into `/predict`'s response and rendered in the frontend result card.
+- **Out-of-distribution safeguard: done and calibrated.** `/predict` rejects low-confidence/high-entropy predictions as `"uncertain"` instead of forcing a top-1 class; threshold tuned to 0.80 based on calibration testing against both synthetic and real-world (including the original anime image) test cases — see Out-of-Distribution Safeguard below.
+- **Frontend: done.** Full redesign — client-side routing (Home / Model / About pages), persistent Navbar and Footer, and a restructured 4-section result card (confidence bar, causal-organism badge, symptoms/management two-column layout, de-emphasized source citation).
+- **Species-gate investigation: done.** A separate binary in-scope/out-of-scope species classifier (MobileNetV3-Small) was built, trained, and tested against real-world photos. Found insufficient — near-perfect validation score but 0/3 real-world successes, a distribution-shift problem rather than a fixable-by-more-data-or-a-bigger-model problem. Documented as an open limitation for future work rather than silently shipped or silently dropped — see Known Limitation: Out-of-Scope Crop Species below.
 
-**Not done — next up:**
-- Backend `/predict` still needs to be wired to real inference (currently in progress).
-- Treatment-recommendation lookup table covering all 30 classes not yet built.
-- Frontend polish and real-world (non-lab-condition) photo testing not yet done.
-- Deployment not yet done (see Tech Stack below for target platforms).
+**Not done — by deliberate choice, not oversight:**
+- Deployment. Project scope intentionally excludes standing up the backend/frontend on Render/Railway/Vercel or similar — see Tech Stack below for what that would target if scope changes.
+- Further real-world stress-testing beyond what's documented above (the OOD calibration set and the 3 species-gate test photos). Not a gap that was missed — a deliberate stopping point given project scope.
 
-**Immediate next step:**
-1. Replace the backend's dummy `/predict` response with real model inference (load `krishivision_model.pt` once at startup, apply the same preprocessing as validation, return predicted class + confidence).
-2. Build the treatment-recommendation lookup table for all 30 classes.
-3. Frontend polish, real-world photo testing, then deployment.
+**If resuming further work**, the two open, honestly-documented limitations — Rice Brown Spot/Leaf Blast confusion, and out-of-scope crop species — are the natural next targets. See their respective sections below for what a real fix would require in each case.
 
 ## Model Architecture Decision
 
@@ -86,7 +85,9 @@ Calibration test (2026-07-31) against 6 non-plant images (solid color, random no
 - **5 of 6 non-plant images correctly rejected at the original 0.60 threshold.** The miss: a flat solid-color image was accepted at 75% confidence, 0.30 normalized entropy — predicted `Corn_Healthy`. This is the known failure mode described in Future Enhancements above (low-entropy false confidence on content-free input), not a bug in the threshold logic itself.
 - **5 of 5 real plant images correctly accepted**, confidence 0.90–1.00, entropy 0.00–0.15 — comfortably clear of both thresholds, no false rejections observed.
 
-`CONFIDENCE_THRESHOLD` raised from 0.60 to **0.80** (2026-07-31) based on this data — all 5 real plant confidences were ≥0.90, so this catches the solid-color miss (0.75 < 0.80) at zero observed cost to real results. Still pending: manual verification with real (non-synthetic) non-plant photos, including the original anime image that motivated this feature, plus the user's own real leaf photos — the synthetic test set above is an imperfect proxy and this threshold isn't considered final until that manual check passes.
+`CONFIDENCE_THRESHOLD` raised from 0.60 to **0.80** (2026-07-31) based on this data — all 5 real plant confidences were ≥0.90, so this catches the solid-color miss (0.75 < 0.80) at zero observed cost to real results.
+
+**Manual verification: complete.** The real anime image that originally motivated this feature, plus other real (non-synthetic) photos, were manually tested against the 0.80 threshold — a flat-color/low-texture image correctly triggered `"uncertain"`, confirming the threshold generalizes beyond the synthetic test set above. As a follow-up fix, `ConfidenceBar.jsx`'s amber/red color zones — dead code once results are gated at 0.80 confidence, since anything below that never reaches the result card in the first place — were subsequently removed; the bar now always renders green, matching what's actually reachable.
 
 ## Final Training Results (2026-07-27)
 
